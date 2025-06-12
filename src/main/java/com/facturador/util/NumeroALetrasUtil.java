@@ -15,6 +15,12 @@ public class NumeroALetrasUtil {
             "OCHENTA", "NOVENTA"
     };
 
+    // Formas correctas para los números del 21 al 29
+    private static final String[] VEINTI_UNIDADES = {
+            "VEINTIUNO", "VEINTIDÓS", "VEINTITRÉS", "VEINTICUATRO", "VEINTICINCO",
+            "VEINTISÉIS", "VEINTISIETE", "VEINTIOCHO", "VEINTINUEVE"
+    };
+
     private static final String[] CENTENAS = {
             "", "CIENTO", "DOSCIENTOS", "TRESCIENTOS", "CUATROCIENTOS", "QUINIENTOS",
             "SEISCIENTOS", "SETECIENTOS", "OCHOCIENTOS", "NOVECIENTOS"
@@ -41,7 +47,11 @@ public class NumeroALetrasUtil {
             int decena = (int) (numero / 10);
             int unidad = (int) (numero % 10);
             if (numero <= 29) {
-                return DECENAS[decena] + UNIDADES[unidad].toLowerCase();
+                // Utilizar las formas especiales para el rango 21-29
+                if (numero >= 21) {
+                    return VEINTI_UNIDADES[(int) numero - 21];
+                }
+                return DECENAS[decena] + UNIDADES[unidad];
             } else {
                 return DECENAS[decena] + (unidad > 0 ? " Y " + UNIDADES[unidad] : "");
             }

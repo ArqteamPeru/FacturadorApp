@@ -10,10 +10,10 @@ public class DefaultKieSessionUtils {
             .newKieClasspathContainer();
 
     public static KieSession getEnrichRulesSession() {
-        return kc.newKieSession("enrich-session");
+        return kc.newKieSession("enrichRulesSession");
     }
 
     public static KieSession getSummaryRulesSession() {
-        return kc.newKieSession("summary-session");
+        return kc.newKieSession("summaryRulesSession");
     }
 }

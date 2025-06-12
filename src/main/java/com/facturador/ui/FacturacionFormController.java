@@ -218,7 +218,7 @@ public class FacturacionFormController {
 
         try (Connection conn = DatabaseConnection.getConnection()) {
             conn.setAutoCommit(false);
-            String sqlCab = "INSERT INTO comprobante (tipo_comprobante, serie, correlativo, fecha_emision, fecha_vencimiento, tipo_operacion, condicion_pago, metodo_pago, ruc_dni, razon_social, direccion, total, estado, con_detraccion, codigo_bien_detraccion, porcentaje_detraccion, monto_detraccion, cuenta_bn) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sqlCab = "INSERT INTO comprobante (tipo_comprobante, serie, correlativo, fecha_emision, fecha_vencimiento, tipo_operacion, condicion_pago, metodo_pago, ruc_dni, razon_social, direccion, total, estado, con_detraccion, codigo_bien_detraccion, porcentaje_detraccion, monto_detraccion, cuenta_bn, medio_pago_detraccion, leyenda_detraccion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             try (PreparedStatement pstmt = conn.prepareStatement(sqlCab, Statement.RETURN_GENERATED_KEYS)) {
                 pstmt.setString(1, comp.getTipoComprobante());
                 pstmt.setString(2, comp.getSerie());
@@ -238,6 +238,8 @@ public class FacturacionFormController {
                 pstmt.setDouble(16, comp.getPorcentajeDetraccion() != null ? comp.getPorcentajeDetraccion() : 0.0);
                 pstmt.setDouble(17, comp.getMontoDetraccion() != null ? comp.getMontoDetraccion() : 0.0);
                 pstmt.setString(18, comp.getCuentaBancoNacion());
+                pstmt.setString(19, comp.getMedioPagoDetraccion());
+                pstmt.setString(20, comp.getLeyendaDetraccion());
                 pstmt.executeUpdate();
 
                 ResultSet rs = pstmt.getGeneratedKeys();

@@ -105,17 +105,20 @@ public class MapperDtoToInvoice {
         if (dto.isConDetraccion()
                 && dto.getCodigoBienDetraccion() != null && !dto.getCodigoBienDetraccion().isBlank()
                 && dto.getPorcentajeDetraccion() != null && dto.getPorcentajeDetraccion() > 0
-                && dto.getMontoDetraccion() != null && dto.getMontoDetraccion() > 0
                 && dto.getMedioPagoDetraccion() != null && !dto.getMedioPagoDetraccion().isBlank()
                 && dto.getCuentaBancoNacion() != null && !dto.getCuentaBancoNacion().isBlank()) {
 
-            builder.detraccion(Detraccion.builder()
+            Detraccion.DetraccionBuilder detraccion = Detraccion.builder()
                     .tipoBienDetraido(dto.getCodigoBienDetraccion())
                     .porcentaje(BigDecimal.valueOf(dto.getPorcentajeDetraccion()))
-                    .monto(BigDecimal.valueOf(dto.getMontoDetraccion()))
                     .medioDePago(dto.getMedioPagoDetraccion())
-                    .cuentaBancaria(dto.getCuentaBancoNacion())
-                    .build());
+                    .cuentaBancaria(dto.getCuentaBancoNacion());
+
+            if (dto.getMontoDetraccion() != null) {
+                detraccion.monto(BigDecimal.valueOf(dto.getMontoDetraccion()));
+            }
+
+            builder.detraccion(detraccion.build());
 
             if (dto.getLeyendaDetraccion() != null && !dto.getLeyendaDetraccion().isBlank()) {
                 builder.leyenda("2000", dto.getLeyendaDetraccion());

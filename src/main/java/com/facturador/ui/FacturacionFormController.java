@@ -56,6 +56,7 @@ public class FacturacionFormController {
         detalleTable.setEditable(true);
 
         tipoComprobanteCombo.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> actualizarSerieYCorrelativo(newVal));
+        porcentajeDetraccionField.textProperty().addListener((obs, oldVal, newVal) -> actualizarMontoDetraccion());
     }
 
     private void cargarCatalogos() {
@@ -100,6 +101,18 @@ public class FacturacionFormController {
         igvLabel.setText(String.format("%.2f", igv));
         totalLabel.setText(String.format("%.2f", total));
         totalTextoLabel.setText(NumeroALetrasUtil.convertir(total).toUpperCase());
+        actualizarMontoDetraccion();
+    }
+
+    private void actualizarMontoDetraccion() {
+        if (conDetraccionCheckBox.isSelected()) {
+            double porcentaje = parseDoubleSafe(porcentajeDetraccionField.getText());
+            double total = parseDoubleSafe(totalLabel.getText());
+            double monto = total * porcentaje / 100.0;
+            montoDetraccionField.setText(String.format("%.2f", monto));
+        } else {
+            montoDetraccionField.clear();
+        }
     }
 
     private double parseDoubleSafe(String texto) {
@@ -205,8 +218,10 @@ public class FacturacionFormController {
         if (conDetraccionCheckBox.isSelected()) {
             comp.setConDetraccion(true);
             comp.setCodigoBienDetraccion(codigoBienDetraccionField.getText());
-            comp.setPorcentajeDetraccion(parseDoubleSafe(porcentajeDetraccionField.getText()));
-            comp.setMontoDetraccion(parseDoubleSafe(montoDetraccionField.getText()));
+            double porcentaje = parseDoubleSafe(porcentajeDetraccionField.getText());
+            comp.setPorcentajeDetraccion(porcentaje);
+            double total = parseDoubleSafe(totalLabel.getText());
+            comp.setMontoDetraccion(total * porcentaje / 100.0);
             comp.setCuentaBancoNacion(cuentaBancoNacionField.getText());
             String medio = medioPagoDetraccionCombo.getValue();
             if (medio != null && medio.contains("-")) {

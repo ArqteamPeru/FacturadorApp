@@ -30,6 +30,13 @@ public class ComprobanteDAO {
                 LocalDate fechaEmision = LocalDate.parse(rs.getString("fecha_emision"));
                 String estado = rs.getString("estado");
                 String direccion = rs.getString("direccion");
+                boolean conDetraccion = rs.getBoolean("con_detraccion");
+                String codigoBien = rs.getString("codigo_bien_detraccion");
+                Double porcentaje = rs.getObject("porcentaje_detraccion") != null ? rs.getDouble("porcentaje_detraccion") : null;
+                Double monto = rs.getObject("monto_detraccion") != null ? rs.getDouble("monto_detraccion") : null;
+                String cuentaBN = rs.getString("cuenta_bn");
+                String medioPagoDet = rs.getString("medio_pago_detraccion");
+                String leyendaDet = rs.getString("leyenda_detraccion");
 
                 // Carga de detalles asociados
                 List<ItemDetalle> detalles = obtenerDetallesPorComprobanteId(id);
@@ -49,6 +56,13 @@ public class ComprobanteDAO {
                 );
 
                 c.setEstado(estado);
+                c.setConDetraccion(conDetraccion);
+                c.setCodigoBienDetraccion(codigoBien);
+                c.setPorcentajeDetraccion(porcentaje);
+                c.setMontoDetraccion(monto);
+                c.setCuentaBancoNacion(cuentaBN);
+                c.setMedioPagoDetraccion(medioPagoDet);
+                c.setLeyendaDetraccion(leyendaDet);
                 lista.add(c);
             }
 

@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 public class UsuarioDAO {
 
     public static Usuario validarLogin(String username, String password) {
-        String sql = "SELECT * FROM usuario WHERE username = ? AND password = ?";
+        String sql = "SELECT * FROM usuario WHERE usuario = ? AND clave = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -21,8 +21,8 @@ public class UsuarioDAO {
             if (rs.next()) {
                 Usuario u = new Usuario();
                 u.setId(rs.getInt("id"));
-                u.setUsername(rs.getString("username"));
-                u.setPassword(rs.getString("password"));
+                u.setUsername(rs.getString("usuario"));
+                u.setPassword(rs.getString("clave"));
                 u.setNombre(rs.getString("nombre"));
                 return u;
             }

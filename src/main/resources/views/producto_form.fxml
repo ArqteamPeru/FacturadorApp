@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.facturador.ui.ProductoFormController"
+      spacing="10"
+      alignment="CENTER">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Registro de Producto o Servicio" style="-fx-font-size: 18px;" />
+
+    <ComboBox fx:id="tipoCombo" promptText="Tipo (Producto o Servicio)" prefWidth="300"/>
+    <TextField fx:id="descripcionField" promptText="Descripción" prefWidth="300"/>
+    <ComboBox fx:id="unidadCombo" promptText="Unidad de Medida" prefWidth="300"/>
+    <TextField fx:id="precioField" promptText="Precio sin IGV" prefWidth="300"/>
+    <ComboBox fx:id="afectacionCombo" promptText="Tipo de Afectación IGV" prefWidth="300"/>
+
+    <HBox spacing="15" alignment="CENTER">
+        <Button text="Registrar" onAction="#registrarProducto"/>
+        <Button text="Volver al listado" onAction="#irAListado"/>
+    </HBox>
+
+</VBox>

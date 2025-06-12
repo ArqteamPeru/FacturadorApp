@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.facturador.ui.ComprobanteListController"
+            prefWidth="800" prefHeight="600">
+
+    <!-- Tabla de comprobantes en el centro -->
+    <center>
+        <VBox spacing="10">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+            <TableView fx:id="tablaComprobantes" prefHeight="500.0">
+                <columns>
+                    <TableColumn fx:id="colTipo" text="Tipo"/>
+                    <TableColumn fx:id="colSerieNumero" text="Serie - Número"/>
+                    <TableColumn fx:id="colCliente" text="Cliente"/>
+                    <TableColumn fx:id="colRucDni" text="RUC / DNI"/>
+                    <TableColumn fx:id="colTotal" text="Total"/>
+                    <TableColumn fx:id="colFecha" text="Fecha Emisión"/>
+                    <TableColumn fx:id="colEstado" text="Estado"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </center>
+
+    <!-- Barra inferior con botones -->
+    <bottom>
+        <VBox spacing="5">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Button text="🔄 Actualizar" onAction="#onActualizarTabla"/>
+                <Button text="📂 Ver XML" onAction="#onVerZipFirmado"/>
+                <Button text="📂 Ver CDR" onAction="#onVerCDR"/>
+                <TextField fx:id="filtroTexto" promptText="Buscar RUC, razón social o estado..." prefWidth="300"/>
+                <Button text="🔍 Buscar" onAction="#onBuscar"/>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT">
+                <Button text="Enviar a SUNAT" onAction="#onEnviarASunat"/>
+            </HBox>
+        </VBox>
+    </bottom>
+
+</BorderPane>

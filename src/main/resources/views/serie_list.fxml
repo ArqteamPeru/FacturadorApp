@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.facturador.ui.SerieListController">
+
+    <top>
+        <ToolBar>
+            <Button text="💾 Guardar Cambios" onAction="#guardarCambios"/>
+            <Button text="🔄 Recargar" onAction="#cargarDatos"/>
+        </ToolBar>
+    </top>
+
+    <center>
+        <TableView fx:id="tablaSeries" editable="true">
+            <columns>
+                <TableColumn fx:id="colTipo" text="Tipo de Comprobante" prefWidth="250"/>
+                <TableColumn fx:id="colSerie" text="Serie" prefWidth="120"/>
+                <TableColumn fx:id="colCorrelativo" text="Correlativo" prefWidth="140"/>
+            </columns>
+        </TableView>
+    </center>
+</BorderPane>

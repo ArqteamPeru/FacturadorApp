@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.facturador.ui.MainViewController">
+
+    <top>
+        <MenuBar>
+            <menus>
+                <Menu text="Archivo">
+                    <MenuItem text="Configuración" onAction="#abrirConfiguracion"/>
+                    <MenuItem text="Salir" onAction="#salir"/>
+                </Menu>
+                <Menu text="Módulos">
+                    <MenuItem text="Clientes" onAction="#abrirClientes"/>
+                    <MenuItem text="Productos / Servicios" onAction="#abrirProductos"/>
+                    <MenuItem text="Series y Numeración" onAction="#abrirSeries"/>
+                </Menu>
+                <Menu text="Facturación">
+                    <MenuItem text="Generar Comprobante" onAction="#abrirFacturacion"/>
+                    <MenuItem text="Ver Comprobantes Emitidos" onAction="#mostrarComprobantes"/>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+
+    <center>
+        <Label fx:id="mensajeBienvenida"
+               text="Bienvenido al Facturador Electrónico"
+               style="-fx-font-size: 18px; -fx-padding: 10px;"/>
+    </center>
+</BorderPane>

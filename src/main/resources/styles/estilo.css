@@ -1,0 +1,44 @@
+/* styles/estilo.css */
+
+.root {
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-font-size: 13px;
+}
+
+.table-view {
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1;
+    -fx-background-color: #ffffff;
+    -fx-table-cell-border-color: #dddddd;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: linear-gradient(to bottom, #f0f0f0, #dcdcdc);
+}
+
+.table-column {
+    -fx-alignment: CENTER-LEFT;
+}
+
+.button {
+    -fx-background-color: #2e8b57;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #3cb371;
+}
+
+.text-field {
+    -fx-background-color: #f9f9f9;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 4;
+    -fx-padding: 5;
+}
+
+.label {
+    -fx-text-fill: #333;
+}

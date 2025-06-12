@@ -1,0 +1,30 @@
+.root {
+    -fx-background-color: #f8f9fa;
+    -fx-font-family: "Segoe UI", sans-serif;
+}
+
+.card {
+    -fx-background-color: white;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-padding: 20;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 8, 0.2, 0, 4);
+}
+
+.label {
+    -fx-font-size: 14px;
+}
+
+.h3 {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.text-danger {
+    -fx-text-fill: #dc3545;
+}
+
+.btn {
+    -fx-cursor: hand;
+    -fx-font-size: 14px;
+}

@@ -1,0 +1,6 @@
+<kmodule xmlns="http://www.drools.org/xsd/kmodule">
+    <kbase name="rules" packages="rules">
+        <ksession name="enrichRulesSession"/>
+        <ksession name="summaryRulesSession"/>
+    </kbase>
+</kmodule>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<ScrollPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.facturador.ui.LoginController"
+            fitToWidth="true">
+
+    <content>
+        <VBox alignment="CENTER" spacing="20" styleClass="bg-light">
+            <padding>
+                <Insets top="30" right="30" bottom="30" left="30"/>
+            </padding>
+
+            <Label text="Inicio de Sesión"
+                   styleClass="h2 text-primary"/>
+
+            <TextField fx:id="txtUsuario"
+                       promptText="Usuario"
+                       prefWidth="250"
+                       styleClass="form-control"/>
+
+            <PasswordField fx:id="txtClave"
+                           promptText="Contraseña"
+                           prefWidth="250"
+                           styleClass="form-control"/>
+
+            <!-- Teclado numérico -->
+            <GridPane hgap="10" vgap="10">
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="33"/>
+                    <ColumnConstraints percentWidth="33"/>
+                    <ColumnConstraints percentWidth="33"/>
+                </columnConstraints>
+
+                <!-- Números -->
+                <Button text="1" onAction="#agregarDigito" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <Button text="2" onAction="#agregarDigito" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                <Button text="3" onAction="#agregarDigito" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+
+                <Button text="4" onAction="#agregarDigito" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <Button text="5" onAction="#agregarDigito" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                <Button text="6" onAction="#agregarDigito" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+
+                <Button text="7" onAction="#agregarDigito" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <Button text="8" onAction="#agregarDigito" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                <Button text="9" onAction="#agregarDigito" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
+
+                <Button text="C" onAction="#limpiarClave" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                <Button text="0" onAction="#agregarDigito" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                <Button text="⌫" onAction="#retrocederClave" GridPane.rowIndex="3" GridPane.columnIndex="2"/>
+            </GridPane>
+
+            <Button text="Ingresar"
+                    onAction="#ingresar"
+                    styleClass="btn btn-primary btn-lg"
+                    prefWidth="200"/>
+
+            <Label fx:id="lblMensaje"
+                   text=""
+                   style="-fx-text-fill: red;"/>
+
+        </VBox>
+    </content>
+</ScrollPane>

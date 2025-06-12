@@ -1,0 +1,16 @@
+package rules.summary;
+
+import io.github.project.openubl.xbuilder.content.models.standard.general.Invoice;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
+rule "Calcular monto de detracción"
+when
+    $doc : Invoice(detraccion != null && totalImporte != null)
+then
+    BigDecimal porcentaje = $doc.getDetraccion().getPorcentaje();
+    BigDecimal total = $doc.getTotalImporte().getImporteConImpuestos();
+    BigDecimal monto = porcentaje.multiply(total).setScale(2, RoundingMode.HALF_EVEN);
+    $doc.getDetraccion().setMonto(monto);
+    System.out.println("✅ Monto detracción calculado: " + monto);
+end

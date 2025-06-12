@@ -1,0 +1,12 @@
+package rules.enrich;
+
+import io.github.project.openubl.xbuilder.content.models.standard.general.Invoice;
+import io.github.project.openubl.xbuilder.content.catalogs.Catalog52;
+
+rule "Agregar leyenda de detracción si aplica"
+when
+    $doc : Invoice(detraccion != null)
+then
+    System.out.println("✅ Agregando leyenda de detracción");
+    $doc.getLeyendas().put(Catalog52.OPERACION_SUJETA_A_DETRACCION.getCode(), Catalog52.OPERACION_SUJETA_A_DETRACCION.getLabel());
+end

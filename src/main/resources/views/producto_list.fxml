@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.facturador.ui.ProductoListController"
+      spacing="10" alignment="CENTER">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Listado de Productos y Servicios" style="-fx-font-size: 18px;" />
+
+    <TextField fx:id="buscarField" promptText="Buscar por descripción..." prefWidth="400"/>
+
+    <TableView fx:id="tablaProductos" prefWidth="700" prefHeight="300">
+        <columns>
+            <TableColumn fx:id="colCodigo" text="Código" prefWidth="80"/>
+            <TableColumn fx:id="colDescripcion" text="Descripción" prefWidth="220"/>
+            <TableColumn fx:id="colUnidad" text="Unidad" prefWidth="100"/>
+            <TableColumn fx:id="colPrecio" text="Precio (sin IGV)" prefWidth="120"/>
+            <TableColumn fx:id="colAfectacion" text="Tipo Afectación IGV" prefWidth="160"/>
+        </columns>
+    </TableView>
+
+    <HBox spacing="20" alignment="CENTER">
+        <padding>
+            <Insets top="10" right="10" bottom="10" left="10"/>
+        </padding>
+
+        <Button text="Nuevo" onAction="#irAFormulario"/>
+        <Button text="Editar seleccionado" onAction="#editarSeleccionado"/>
+        <Button text="Eliminar seleccionado" onAction="#eliminarSeleccionado"/>
+        <Button text="Recargar" onAction="#recargarTabla"/>
+    </HBox>
+
+</VBox>

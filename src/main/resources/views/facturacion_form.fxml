@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.facturador.ui.FacturacionFormController">
+
+    <center>
+        <VBox spacing="10">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+
+            <Label text="Formulario de Facturación"
+                   style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+            <!-- Datos del cliente -->
+            <HBox spacing="10">
+                <ComboBox fx:id="tipoComprobanteCombo" prefWidth="200"/>
+                <TextField fx:id="rucField" promptText="RUC/DNI Cliente" onKeyReleased="#buscarClientePorRUC"/>
+                <TextField fx:id="razonSocialField" promptText="Razón Social / Nombre" editable="false"/>
+                <TextField fx:id="direccionField" promptText="Dirección" editable="false"/>
+            </HBox>
+
+            <!-- Serie y correlativo -->
+            <HBox spacing="10">
+                <Label text="Serie:"/>
+                <TextField fx:id="serieField" editable="false" prefWidth="100"/>
+                <Label text="Correlativo:"/>
+                <TextField fx:id="correlativoField" editable="false" prefWidth="120"/>
+            </HBox>
+
+            <!-- Fechas -->
+            <HBox spacing="10">
+                <Label text="Fecha de Emisión:"/>
+                <DatePicker fx:id="fechaEmisionPicker"/>
+                <Label text="Fecha de Vencimiento:"/>
+                <DatePicker fx:id="fechaVencimientoPicker"/>
+            </HBox>
+
+            <!-- Operación y forma de pago -->
+            <HBox spacing="10">
+                <ComboBox fx:id="tipoOperacionCombo" promptText="Tipo de operación" prefWidth="250"/>
+                <ComboBox fx:id="condicionPagoCombo" promptText="Condición de pago"/>
+                <ComboBox fx:id="metodoPagoCombo" promptText="Método de pago"/>
+            </HBox>
+
+            <!-- Sección Detracción -->
+            <TitledPane text="Información de Detracción" expanded="false">
+                <VBox spacing="10">
+                    <padding>
+                        <Insets top="10" right="10" bottom="10" left="10"/>
+                    </padding>
+
+                    <CheckBox fx:id="conDetraccionCheckBox" text="¿Aplica Detracción?" />
+
+                    <HBox spacing="10">
+                        <Label text="Bien o Servicio:"/>
+                        <TextField fx:id="codigoBienDetraccionField" promptText="Código de bien o servicio"/>
+                    </HBox>
+
+                    <HBox spacing="10">
+                        <Label text="Porcentaje:"/>
+                        <TextField fx:id="porcentajeDetraccionField" promptText="Ej: 12.00"/>
+                        <Label text="Monto:"/>
+                        <TextField fx:id="montoDetraccionField" promptText="Ej: 150.00"/>
+                    </HBox>
+
+                    <HBox spacing="10">
+                        <Label text="Cuenta Banco Nación:"/>
+                        <TextField fx:id="cuentaBancoNacionField" promptText="Ej: 00011223344"/>
+                    </HBox>
+
+                    <HBox spacing="10">
+                        <Label text="Medio de Pago:"/>
+                        <ComboBox fx:id="medioPagoDetraccionCombo" promptText="Seleccione medio"/>
+                    </HBox>
+
+                    <HBox spacing="10">
+                        <Label text="Leyenda SUNAT:"/>
+                        <TextField fx:id="leyendaDetraccionField"
+                                   promptText="Ej: Operación sujeta al Sistema de Pago..."
+                                   text="Operación sujeta al Sistema de Pago de Obligaciones Tributarias con el Gobierno Central"/>
+                    </HBox>
+                </VBox>
+            </TitledPane>
+
+            <!-- Tabla de detalles -->
+            <TableView fx:id="detalleTable" prefHeight="200">
+                <columns>
+                    <TableColumn fx:id="descripcionColumn" text="Descripción" prefWidth="250"/>
+                    <TableColumn fx:id="cantidadColumn" text="Cantidad" prefWidth="80"/>
+                    <TableColumn fx:id="precioColumn" text="Precio Unitario" prefWidth="100"/>
+                    <TableColumn fx:id="totalColumn" text="Total" prefWidth="100"/>
+                </columns>
+            </TableView>
+
+            <!-- Botones -->
+            <HBox spacing="10">
+                <Button text="➕ Agregar Producto o Servicio" onAction="#agregarItem"/>
+                <Button text="❌ Eliminar ítem seleccionado" onAction="#eliminarItemSeleccionado"/>
+            </HBox>
+
+            <!-- Totales -->
+            <HBox spacing="20" alignment="CENTER_RIGHT">
+                <Label text="Subtotal:"/>
+                <Label fx:id="subtotalLabel"/>
+                <Label text="IGV (18%):"/>
+                <Label fx:id="igvLabel"/>
+                <Label text="Total:" style="-fx-font-weight: bold;"/>
+                <Label fx:id="totalLabel" style="-fx-font-weight: bold;"/>
+            </HBox>
+
+            <!-- Total en letras -->
+            <HBox spacing="10">
+                <Label text="Total en letras:" style="-fx-font-weight: bold;"/>
+                <Label fx:id="totalTextoLabel" wrapText="true" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+            </HBox>
+
+            <!-- Botón guardar -->
+            <Button text="💾 Guardar Comprobante" onAction="#guardarFactura"/>
+        </VBox>
+    </center>
+</BorderPane>

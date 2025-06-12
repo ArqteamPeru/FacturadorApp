@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.PreparedStatement;
 
 @Component // 👈 NECESARIO para que Spring lo registre
 public class ClienteListController {
@@ -116,10 +117,11 @@ public class ClienteListController {
 
             confirmacion.showAndWait().ifPresent(respuesta -> {
                 if (respuesta == ButtonType.OK) {
-                    String sql = "DELETE FROM cliente WHERE numero_doc = '" + seleccionado.getNumeroDoc() + "'";
+                    String sql = "DELETE FROM cliente WHERE numero_doc = ?";
                     try (Connection conn = DatabaseConnection.getConnection();
-                         Statement stmt = conn.createStatement()) {
-                        stmt.executeUpdate(sql);
+                         PreparedStatement pstmt = conn.prepareStatement(sql)) {
+                        pstmt.setString(1, seleccionado.getNumeroDoc());
+                        pstmt.executeUpdate();
                         System.out.println("✅ Cliente eliminado.");
                         recargarTabla();
                     } catch (Exception e) {

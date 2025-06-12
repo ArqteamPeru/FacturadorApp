@@ -8,7 +8,8 @@ rule "Calcular monto de detracción"
 when
     $doc : Invoice(detraccion != null && totalImporte != null)
 then
-    BigDecimal porcentaje = $doc.getDetraccion().getPorcentaje();
+    BigDecimal porcentaje = $doc.getDetraccion().getPorcentaje()
+            .divide(new BigDecimal("100"));
     BigDecimal total = $doc.getTotalImporte().getImporteConImpuestos();
     BigDecimal monto = porcentaje.multiply(total).setScale(2, RoundingMode.HALF_EVEN);
     $doc.getDetraccion().setMonto(monto);

@@ -26,7 +26,7 @@ public class RegistroUsuarioController {
             return;
         }
 
-        String claveHash = SeguridadUtil.encriptarSHA256(clave);
+        String claveHash = SeguridadUtil.hashPassword(clave);
         String sql = "INSERT INTO usuario (usuario, clave) VALUES (?, ?)";
 
         try (Connection conn = DatabaseConnection.getConnection();

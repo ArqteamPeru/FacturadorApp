@@ -148,13 +148,21 @@ public class MainApp extends Application {
             // Usuario admin
             ResultSet rs = stmt.executeQuery("SELECT * FROM usuario WHERE usuario = 'admin'");
             if (!rs.next()) {
-                String claveEncriptada = SeguridadUtil.encriptarSHA256("2011");
+                String claveEncriptada = SeguridadUtil.hashPassword("2011");
                 try (PreparedStatement pstmt = conn.prepareStatement(
                         "INSERT INTO usuario (usuario, clave) VALUES (?, ?)")) {
                     pstmt.setString(1, "admin");
                     pstmt.setString(2, claveEncriptada);
                     pstmt.executeUpdate();
                     System.out.println("✅ Usuario 'admin' creado por defecto.");
+                }
+            } else if (SeguridadUtil.isLegacyHash(rs.getString("clave"))) {
+                String nueva = SeguridadUtil.hashPassword("2011");
+                try (PreparedStatement upd = conn.prepareStatement("UPDATE usuario SET clave = ? WHERE id = ?")) {
+                    upd.setString(1, nueva);
+                    upd.setInt(2, rs.getInt("id"));
+                    upd.executeUpdate();
+                    System.out.println("ℹ️ Contraseña de 'admin' actualizada al nuevo formato.");
                 }
             } else {
                 System.out.println("ℹ️ Usuario 'admin' ya existe.");

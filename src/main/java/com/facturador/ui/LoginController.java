@@ -32,26 +32,39 @@ public class LoginController {
             return;
         }
 
-        String claveHash = SeguridadUtil.encriptarSHA256(clave);
-        String sql = "SELECT * FROM usuario WHERE usuario = ? AND clave = ?";
+        String sql = "SELECT * FROM usuario WHERE usuario = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, usuario);
-            pstmt.setString(2, claveHash);
 
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/MainView.fxml"));
-                loader.setControllerFactory(ApplicationContextProvider.getContext()::getBean);  // si deseas usar inyección aquí también
+                String hashAlmacenado = rs.getString("clave");
+                if (SeguridadUtil.verifyPassword(clave, hashAlmacenado)) {
+                    // Si es hash legado, migrar a BCrypt
+                    if (SeguridadUtil.isLegacyHash(hashAlmacenado)) {
+                        String nuevoHash = SeguridadUtil.hashPassword(clave);
+                        try (PreparedStatement upd = conn.prepareStatement("UPDATE usuario SET clave = ? WHERE id = ?")) {
+                            upd.setString(1, nuevoHash);
+                            upd.setInt(2, rs.getInt("id"));
+                            upd.executeUpdate();
+                        }
+                    }
 
-                Stage stage = new Stage();
-                stage.setScene(new Scene(loader.load()));
-                stage.setTitle("Facturador Electrónico");
-                stage.show();
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/MainView.fxml"));
+                    loader.setControllerFactory(ApplicationContextProvider.getContext()::getBean);
 
-                ((Stage) txtUsuario.getScene().getWindow()).close();
+                    Stage stage = new Stage();
+                    stage.setScene(new Scene(loader.load()));
+                    stage.setTitle("Facturador Electrónico");
+                    stage.show();
+
+                    ((Stage) txtUsuario.getScene().getWindow()).close();
+                } else {
+                    lblMensaje.setText("❌ Usuario o clave incorrectos.");
+                }
             } else {
                 lblMensaje.setText("❌ Usuario o clave incorrectos.");
             }

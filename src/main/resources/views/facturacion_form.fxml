@@ -66,7 +66,7 @@
                         <Label text="Porcentaje:"/>
                         <TextField fx:id="porcentajeDetraccionField" promptText="Ej: 12.00"/>
                         <Label text="Monto:"/>
-                        <TextField fx:id="montoDetraccionField" promptText="Ej: 150.00"/>
+                        <TextField fx:id="montoDetraccionField" promptText="Ej: 150"/>
                     </HBox>
 
                     <HBox spacing="10">

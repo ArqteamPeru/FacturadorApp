@@ -18,7 +18,8 @@ import java.util.Base64;
 
 public class SunatClient {
 
-    private static final String URL = "http://localhost:8080/api/facturarsunat";
+    private static final String URL =
+            System.getenv().getOrDefault("SUNAT_URL", "http://localhost:8080/api/facturarsunat");
 
     private static final ObjectMapper mapper = new ObjectMapper()
             .registerModule(new JavaTimeModule())

@@ -3,6 +3,8 @@ package com.facturador.sunat.mapper;
 
 import com.facturador.modelo.Comprobante;
 import com.facturador.modelo.ItemDetalle;
+import com.facturador.modelo.Configuracion;
+import com.facturador.database.ConfiguracionDAO;
 import com.facturador.sunat.dto.ComprobanteDTO;
 import com.facturador.sunat.dto.ItemDetalleDTO;
 import java.util.List;
@@ -15,8 +17,12 @@ public class ComprobanteMapper {
         dto.setSerie(c.getSerie());
         dto.setNumero(Integer.parseInt(c.getCorrelativo()));
         dto.setFechaEmision(c.getFechaEmision());
-        dto.setRucEmisor("20123456789");
-        dto.setRazonSocialEmisor("EMPRESA DEMO SAC");
+
+        Configuracion config = new ConfiguracionDAO().obtener();
+        if (config != null) {
+            dto.setRucEmisor(config.getRuc());
+            dto.setRazonSocialEmisor(config.getRazonSocial());
+        }
         dto.setTipoDocumentoCliente(c.getNumeroDocumento().length() == 11 ? "6" : "1");
         dto.setNumeroDocumentoCliente(c.getNumeroDocumento());
         dto.setRazonSocialCliente(c.getRazonSocial());

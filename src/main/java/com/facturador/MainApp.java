@@ -58,8 +58,8 @@ public class MainApp extends Application {
                     "codigo TEXT," +
                     "descripcion TEXT," +
                     "unidad TEXT," +
-                    "precio REAL," +
-                    "afectacion TEXT)");
+                    "precio_unit REAL," +
+                    "tipo_afectacion TEXT)");
 
             stmt.execute("CREATE TABLE IF NOT EXISTS serie (" +
                     "id INTEGER PRIMARY KEY AUTOINCREMENT," +

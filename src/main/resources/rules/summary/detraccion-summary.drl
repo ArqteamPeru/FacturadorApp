@@ -10,7 +10,7 @@ when
 then
     BigDecimal porcentaje = $doc.getDetraccion().getPorcentaje();
     BigDecimal total = $doc.getTotalImporte().getImporteConImpuestos();
-    BigDecimal monto = porcentaje.multiply(total).setScale(2, RoundingMode.HALF_EVEN);
+    BigDecimal monto = porcentaje.multiply(total).setScale(0, RoundingMode.HALF_EVEN);
     $doc.getDetraccion().setMonto(monto);
     System.out.println("✅ Monto detracción calculado: " + monto);
 end

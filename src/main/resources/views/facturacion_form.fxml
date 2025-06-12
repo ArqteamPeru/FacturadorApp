@@ -55,35 +55,36 @@
                         <Insets top="10" right="10" bottom="10" left="10"/>
                     </padding>
 
-                    <CheckBox fx:id="conDetraccionCheckBox" text="¿Aplica Detracción?" />
+                    <CheckBox fx:id="conDetraccionCheckBox" text="¿Aplica Detracción?" onAction="#toggleDetraccion" />
 
                     <HBox spacing="10">
                         <Label text="Bien o Servicio:"/>
-                        <TextField fx:id="codigoBienDetraccionField" promptText="Código de bien o servicio"/>
+                        <TextField fx:id="codigoBienDetraccionField" promptText="Código de bien o servicio" disable="true"/>
                     </HBox>
 
                     <HBox spacing="10">
                         <Label text="Porcentaje:"/>
-                        <TextField fx:id="porcentajeDetraccionField" promptText="Ej: 12.00"/>
+                        <TextField fx:id="porcentajeDetraccionField" promptText="Ej: 12.00" disable="true"/>
                         <Label text="Monto:"/>
-                        <TextField fx:id="montoDetraccionField" promptText="Ej: 150.00"/>
+                        <TextField fx:id="montoDetraccionField" promptText="Ej: 150.00" disable="true"/>
                     </HBox>
 
                     <HBox spacing="10">
                         <Label text="Cuenta Banco Nación:"/>
-                        <TextField fx:id="cuentaBancoNacionField" promptText="Ej: 00011223344"/>
+                        <TextField fx:id="cuentaBancoNacionField" promptText="Ej: 00011223344" disable="true"/>
                     </HBox>
 
                     <HBox spacing="10">
                         <Label text="Medio de Pago:"/>
-                        <ComboBox fx:id="medioPagoDetraccionCombo" promptText="Seleccione medio"/>
+                        <ComboBox fx:id="medioPagoDetraccionCombo" promptText="Seleccione medio" disable="true"/>
                     </HBox>
 
                     <HBox spacing="10">
                         <Label text="Leyenda SUNAT:"/>
                         <TextField fx:id="leyendaDetraccionField"
                                    promptText="Ej: Operación sujeta al Sistema de Pago..."
-                                   text="Operación sujeta al Sistema de Pago de Obligaciones Tributarias con el Gobierno Central"/>
+                                   text="Operación sujeta al Sistema de Pago de Obligaciones Tributarias con el Gobierno Central"
+                                   disable="true"/>
                     </HBox>
                 </VBox>
             </TitledPane>

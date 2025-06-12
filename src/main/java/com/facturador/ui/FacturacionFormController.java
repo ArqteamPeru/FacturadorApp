@@ -56,6 +56,10 @@ public class FacturacionFormController {
         detalleTable.setEditable(true);
 
         tipoComprobanteCombo.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> actualizarSerieYCorrelativo(newVal));
+
+        // Inicializar estado de campos de detracción
+        toggleDetraccion();
+        conDetraccionCheckBox.selectedProperty().addListener((obs, o, n) -> toggleDetraccion());
     }
 
     private void cargarCatalogos() {
@@ -118,11 +122,24 @@ public class FacturacionFormController {
         alert.showAndWait();
     }
 
+    @FXML
+    private void toggleDetraccion() {
+        boolean habilitar = conDetraccionCheckBox.isSelected();
+        codigoBienDetraccionField.setDisable(!habilitar);
+        porcentajeDetraccionField.setDisable(!habilitar);
+        montoDetraccionField.setDisable(!habilitar);
+        cuentaBancoNacionField.setDisable(!habilitar);
+        medioPagoDetraccionCombo.setDisable(!habilitar);
+        leyendaDetraccionField.setDisable(!habilitar);
+    }
+
     private void limpiarFormulario() {
         rucField.clear(); razonSocialField.clear(); direccionField.clear(); detalles.clear();
         subtotalLabel.setText("0.00"); igvLabel.setText("0.00"); totalLabel.setText("0.00");
-        totalTextoLabel.setText("SON: CERO CON 00/100 SOLES"); conDetraccionCheckBox.setSelected(false);
+        totalTextoLabel.setText("SON: CERO CON 00/100 SOLES");
+        conDetraccionCheckBox.setSelected(false);
         codigoBienDetraccionField.clear(); porcentajeDetraccionField.clear(); montoDetraccionField.clear(); cuentaBancoNacionField.clear(); leyendaDetraccionField.clear();
+        toggleDetraccion();
     }
 
     @FXML

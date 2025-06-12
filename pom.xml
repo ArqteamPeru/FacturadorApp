@@ -98,6 +98,13 @@
             <version>0.4.0</version>
         </dependency>
 
+        <!-- Library for BCrypt password hashing -->
+        <dependency>
+            <groupId>org.mindrot</groupId>
+            <artifactId>jbcrypt</artifactId>
+            <version>0.4</version>
+        </dependency>
+
     </dependencies>
 
     <build>

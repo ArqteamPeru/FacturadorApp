@@ -116,10 +116,11 @@ public class ClienteListController {
 
             confirmacion.showAndWait().ifPresent(respuesta -> {
                 if (respuesta == ButtonType.OK) {
-                    String sql = "DELETE FROM cliente WHERE numero_doc = '" + seleccionado.getNumeroDoc() + "'";
+                    String sql = "DELETE FROM cliente WHERE numero_doc = ?";
                     try (Connection conn = DatabaseConnection.getConnection();
-                         Statement stmt = conn.createStatement()) {
-                        stmt.executeUpdate(sql);
+                         PreparedStatement stmt = conn.prepareStatement(sql)) {
+                        stmt.setString(1, seleccionado.getNumeroDoc());
+                        stmt.executeUpdate();
                         System.out.println("✅ Cliente eliminado.");
                         recargarTabla();
                     } catch (Exception e) {

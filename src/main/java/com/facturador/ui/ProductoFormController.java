@@ -134,9 +134,22 @@ public class ProductoFormController {
         actualizarUnidadSegunTipo();
 
         descripcionField.setText(producto.getDescripcion());
-        unidadCombo.setValue(producto.getUnidad() + " - ");
+
+        for (String item : unidadCombo.getItems()) {
+            if (item.startsWith(producto.getUnidad())) {
+                unidadCombo.setValue(item);
+                break;
+            }
+        }
+
         precioField.setText(String.format("%.2f", producto.getPrecioUnit()));
-        afectacionCombo.setValue(producto.getTipoAfectacion() + " - ");
+
+        for (String item : afectacionCombo.getItems()) {
+            if (item.startsWith(producto.getTipoAfectacion())) {
+                afectacionCombo.setValue(item);
+                break;
+            }
+        }
     }
 
     public void setCallbackProductoAgregado(Consumer<Producto> callback) {
